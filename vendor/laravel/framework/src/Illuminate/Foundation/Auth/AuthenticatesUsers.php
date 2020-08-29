@@ -29,15 +29,13 @@ trait AuthenticatesUsers
         $headerAcronymRegular = $companyDetails['header_acronym_regular'];
 
         $login_background_image = $loginImage->login_background_image;
-
         $default_login_image = 'loginImage/login-bg-16.jpg';
 
-        $logo = isset($companyDetails->company_logo);
-
-
+       
+        $data['companyDetailLogo'] = (!empty($loginImage->company_logo)) ? Storage::disk('local')->url("logo/$loginImage->company_logo") : '';
 
         $data['login_background_image'] = (!empty($login_background_image)) ? Storage::disk('local')->url("logos/$login_background_image") : Storage::disk('local')->url($default_login_image);
-        $data['defaultlogo'] = (!empty($logo)) ? Storage::disk('local')->url("logo/$logo") : '';
+
         $data['headerNameBold'] = $headerNameBold;
         $data['headerNameRegular'] = $headerNameRegular;
         $data['headerAcronymBold'] = $headerAcronymBold;

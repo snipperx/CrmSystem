@@ -71,7 +71,7 @@ class RegisterController extends Controller
         ]);
 
 
-        $customer = HRPerson::create([
+        $users = HRPerson::create([
             'user_id' => $user['id'],
             'first_name' => $data['name'],
             'email' => $data['email'],

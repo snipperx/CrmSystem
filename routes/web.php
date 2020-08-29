@@ -17,16 +17,28 @@
 
 
 Route::get('/', 'DashboardController@index');
+
+Auth::routes(['register' => false]);
 Auth::routes();
+
 
 Route::get('/profile' , 'ContactsSettingsController@index')->name('profile');;
 Route::get('/settings' , 'ContactsSettingsController@settings')->name('settings');;
-Route::get('/Contacts', 'ContactsController@index')->name('Contacts');
+Route::get('/contacts', 'ContactsController@index')->name('Contacts');
+Route::get('/setup', 'ContactsSettingsController@index')->name('Contacts');
+
+Route::get('add_ribbons/{mod}', 'ModuleRibbonController@index');
+
+Route::post('module_active/{mod}', 'ContactsSettingsController@moduleAct');
 
 Route::post('/add_contacts', 'ContactsController@create')->name('add_contacts');;
 Route::post('add_logo', 'ContactsController@addlogo');;
+Route::post('add_module', 'ModuleController@store');;
+Route::post('add_ribbon', 'ModuleRibbonController@store');;
+Route::post('ribbon_active/{mod}', 'ModuleRibbonController@ribbonAct');
 
 
+Route::get('/modules' ,'ModuleController@index');
 
 
 

@@ -457,6 +457,7 @@ var handleThemePageStructureControl = function() {
     if (Cookies && Cookies.get('theme')) {
         if ($('.theme-list [data-theme]').length !== 0) {
             $('.theme-list [data-theme="'+ Cookies.get('theme') +'"]').trigger('click');
+
         }
     }
     

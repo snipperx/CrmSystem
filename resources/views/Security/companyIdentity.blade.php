@@ -1,18 +1,19 @@
 @extends('layouts.default')
 
-@section('title', 'Dashboard V2')
+@section('title', 'Company Identity ')
 @push('css')
     <link href="/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet"/>
-    <link href="/assets/plugins/dropzone/dist/min/dropzone.min.css" rel="styl
+    <link href="/assets/plugins/dropzone/dist/min/dropzone.min.css" rel="stylesheet"/>
+    <link href="/assets/css/app.css" rel="stylesheet"/>
 
 
 @endpush
-    @section('content')
-            <!-- begin breadcrumb -->
-            <ol class=" breadcrumb pull-right">
-    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-    <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-    <li class="breadcrumb-item active">Company Identity</li>
+@section('content')
+    <!-- begin breadcrumb -->
+    <ol class=" breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
+        <li class="breadcrumb-item active">Company Identity</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -183,7 +184,8 @@
                                          class="img-responsive img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
-                            <div class="file-field" {{ ($companyDetails && !empty($companyDetails->company_logo_url)) ? 'col-sm-5' : 'col-sm-10' }}">
+                            <div class="file-field" {{ ($companyDetails && !empty($companyDetails->company_logo_url)) ? 'col-sm-5' : 'col-sm-10' }}
+                            ">
                             <div class="btn btn-outline-success btn-rounded waves-effect btn-sm float-left">
                                 <span>Choose file</span>
                                 <input type="file" id="company_logo" name="company_logo"
@@ -191,7 +193,7 @@
                                        data-show-upload="false">
                             </div>
                         </div>
-                            <br><br><br>
+                        <br><br><br>
                         <div class="form-group{{ $errors->has('sys_theme_color') ? ' has-error' : '' }}">
                             <label for="sys_theme_color" class="col-sm-2 control-label">System Theme Color</label>
 
@@ -318,14 +320,15 @@
                             <label class="myFile" for="login_background_image" class="col-sm-2 control-label">Login
                                 Background Image</label>
 
-                            @if( $companyDetails && !empty($companyDetails->loginImageUrl) )
+                            @if( $companyDetails && !empty($companyDetails->login_background_image_url) )
                                 <div class="col-sm-5" style="margin-bottom: 10px;">
-                                    <img src="{{ $companyDetails->loginImageUrl }}"
+                                    <img src="{{ $companyDetails->login_background_image_url }}"
                                          class="img-responsive img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
 
-                            <div class="file-field" {{ ($companyDetails && !empty($companyDetails->loginImageUrl)) ? 'col-sm-5' : 'col-sm-10' }}">
+                            <div class="file-field" {{ ($companyDetails && !empty($companyDetails->login_background_image_url)) ? 'col-sm-5' : 'col-sm-10' }}
+                            ">
                             <div class="btn btn-outline-success btn-rounded waves-effect btn-sm float-left">
                                 <span>Choose file</span>
                                 <input type="file" id="login_background_image" name="login_background_image"
@@ -341,9 +344,20 @@
                     </div>
                     <br>
 
+                    <div class="btn-group-fab" role="group" aria-label="FAB Menu">
+                        <div>
+                            <button type="button" class="btn btn-main btn-primary has-tooltip" data-placement="left"
+                                    title="Menu"><i class="fa fa-bars"></i></button>
+
+
+                        </div>
+                    </div>
+
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-floppy-o"></i> Search</button>
+                        <button type="submit" class="btn btn-sm btn-success pull-right"><i class="fa fa-floppy-o"></i>
+                            Submit
+                        </button>
                     </div>
 
                 </form>
@@ -355,20 +369,20 @@
     <!-- begin col-6 -->
 
 
-    @endsection
+@endsection
 
-    @push('scripts')
-        <script src="/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-        <script src="/assets/plugins/dropzone/dist/dropzone.js"></script>
-        <script src="/assets/plugins/highlight/highlight.min.js"></script>
-        <script src="/assets/js/demo/render.highlight.js"></script>
-        <script>
-            $(document).ready(function () {
+@push('scripts')
+    <script src="/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/assets/plugins/dropzone/dist/dropzone.js"></script>
+    <script src="/assets/plugins/highlight/highlight.min.js"></script>
+    <script src="/assets/js/demo/render.highlight.js"></script>
+    <script>
+        $(document).ready(function () {
 
-            });
-        </script>
+        });
+    </script>
 
-        <script>
-            $("div#myId").dropzone({url: "/file/post"});
-        </script>
-    @endpush
+    <script>
+        $("div#myId").dropzone({url: "/file/post"});
+    </script>
+@endpush

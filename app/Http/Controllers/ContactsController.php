@@ -36,10 +36,12 @@ class ContactsController extends Controller
      */
     public function create(Request $request)
     {
-//
+
         $this->validate($request, [
             'mailing_address' => 'email',
             'support_email' => 'email',
+            'company_logo' => 'image|mimes:jpeg,png,jpg|max:3000',
+            'login_background_image' => 'image|mimes:jpeg,png,jpg|max:3000',
         ]);
 
         $compDetails = CompanyIdentity::first();
@@ -70,7 +72,7 @@ class ContactsController extends Controller
 
         $input = Input::all();
         $rules = array(
-            'file' => 'image|max:3000',
+            'file' => 'image|mimes:jpeg,png,jpg|max:3000',
         );
 
         $validation = Validator::make($input, $rules);
@@ -99,29 +101,34 @@ class ContactsController extends Controller
     private function uploadLogo(Request $request, CompanyIdentity $compDetails)
     {
         if ($request->hasFile('company_logo')) {
-            $image_name = $request->file('company_logo')->getClientOriginalName();
-            $filename = pathinfo($image_name, PATHINFO_FILENAME);
-
-            $image_ext = $request->file('company_logo')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
-            $path = $request->file('company_logo')->storeAs('public/logo', $fileNameToStore);
-            //Update file name in the database
-            $compDetails->company_logo = $fileNameToStore;
-            $compDetails->update();
+            $image_name = $request->file('company_logo');
+            $image_ext = $image_name->extension();
+            if (in_array($image_ext, ['jpg', 'png', 'jpeg']) &&
+                $image_name->isValid()) {
+                $filename = pathinfo($image_name->getClientOriginalName(), PATHINFO_FILENAME);
+                $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
+                $path = $image_name->storeAs('public/logo', $fileNameToStore);
+                $compDetails->company_logo = $fileNameToStore;
+                $compDetails->update();
+            }
         }
+
     }
 
 
     private function uploadLoginImage(Request $request, CompanyIdentity $compDetails)
     {
         if ($request->hasFile('login_background_image')) {
-            $image_name = $request->file('login_background_image')->getClientOriginalName();
-            $filename = pathinfo($image_name, PATHINFO_FILENAME);
-            $image_ext = $request->file('login_background_image')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
-            $path = $request->file('login_background_image')->storeAs('public/logos', $fileNameToStore);
-            $compDetails->login_background_image = $fileNameToStore;
-            $compDetails->update();
+            $image_name = $request->file('login_background_image');
+            $image_ext = $image_name->extension();
+            if (in_array($image_ext, ['jpg', 'png', 'jpeg']) &&
+                $image_name->isValid()) {
+                $filename = pathinfo($image_name->getClientOriginalName(), PATHINFO_FILENAME);
+                $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
+                $path = $image_name->storeAs('public/logos', $fileNameToStore);
+                $compDetails->login_background_image = $fileNameToStore;
+                $compDetails->update();
+            }
         }
     }
 

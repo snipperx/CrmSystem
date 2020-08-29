@@ -42,7 +42,7 @@
 						Use the attribute <code>data-render="switchery"</code> to render the switchery switcher,
 						and use the attribute <code>data-theme="default"</code> to set the theme color
 					</p>
-					<p class="m-b-25"><input type="checkbox" data-render="switchery" data-theme="default" checked /></p>
+					<p class="m-b-25"><input type="checkbox" data-render="switchery"  data-theme="default" checked /></p>
 					<div class="m-b-5 text-inverse f-w-600">All Available Options</div>
 					<ul class="m-b-10 p-l-30">
 						<li>theme: <code>data-theme="default"</code></li>

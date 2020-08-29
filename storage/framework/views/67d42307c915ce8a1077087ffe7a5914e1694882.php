@@ -12,7 +12,9 @@
         <div class="login-header">
             <div class="brand">
 
-                <span <?php echo e($defaultlogo); ?> ></span> <?php echo e($headerNameBold); ?>
+                <a href="<?php echo e(url('/')); ?>" class="navbar-brand"><span class="navbar-logo"></span> <img
+                            src="<?php echo e($companyDetailLogo); ?>"
+                            class="img-responsive " width="36" height="36"> <b><?php echo e($headerNameBold); ?></b> </a>
 
                 <small><?php echo e($headerAcronymBold); ?> </small>
 
@@ -83,21 +85,7 @@
     </div>
     <!-- end login -->
 
-    <ul class="login-bg-list clearfix">
-        <li class="active"><a href="javascript:;" data-click="change-bg"
-                              data-img="../assets/img/login-bg/login-bg-17.jpg"
-                              style="background-image: url(../assets/img/login-bg/login-bg-17.jpg)"></a></li>
-        <li><a href="javascript:;" data-click="change-bg" data-img="../assets/img/login-bg/login-bg-16.jpg"
-               style="background-image: url(../assets/img/login-bg/login-bg-16.jpg)"></a></li>
-        <li><a href="javascript:;" data-click="change-bg" data-img="../assets/img/login-bg/login-bg-15.jpg"
-               style="background-image: url(../assets/img/login-bg/login-bg-15.jpg)"></a></li>
-        <li><a href="javascript:;" data-click="change-bg" data-img="../assets/img/login-bg/login-bg-14.jpg"
-               style="background-image: url(../assets/img/login-bg/login-bg-14.jpg)"></a></li>
-        <li><a href="javascript:;" data-click="change-bg" data-img="../assets/img/login-bg/login-bg-13.jpg"
-               style="background-image: url(../assets/img/login-bg/login-bg-13.jpg)"></a></li>
-        <li><a href="javascript:;" data-click="change-bg" data-img="../assets/img/login-bg/login-bg-12.jpg"
-               style="background-image: url(../assets/img/login-bg/login-bg-12.jpg)"></a></li>
-    </ul>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
