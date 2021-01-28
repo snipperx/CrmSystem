@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\CompanyIdentity;
-use App\HRPerson;
 use App\Module;
-use App\Module_access;
 use App\ModuleRibbon;
+use App\Module_access;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Hashids\Hashids;
 use Illuminate\Support\Facades\Storage;
 
 class ModuleController extends Controller
@@ -17,6 +15,36 @@ class ModuleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    private function hash(){
+        $hashids = new Hashids();
+        return $hashids;
+    }
+
+    public function access(){
+
+        $hashids = $this->hash();
+
+        $user = Auth::user()->person->id;;
+        $modID = $hashids->encode($user);
+
+        $modules = Module_access::select('module_accesses.*', 'modules.name as mod_name')
+            ->leftJoin("modules", 'module_accesses.module_id', 'module_accesses.id')
+            ->get();
+
+
+        $data['modID'] = $modID;
+        $data['modules'] = $modules;
+        return view('Security.module_access')->with($data);
+    }
+
+    public function UserAccess(Request $request , $user){
+
+        return $request;
+        $hashids = $this->hash();
+        $modID = $hashids->decode($user);
+        return $modID;
     }
     /**
      *
@@ -29,57 +57,37 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        /**
-        $companyDetails = CompanyIdentity::systemSettings();
-
-        view()->composer('includes.sidebar', function ($view) use ($companyDetails) {
 
         $user = Auth::user()->load('person');
 
-
-        $defaultAvatar = ($user->person->gender === 0) ? 'avatars/f-silhouette.jpg' : 'avatars/m-silhouette.jpg';
-        $avatar = $user->person->profile_pic;
-        $position = ($user->person->position) ? DB::table('hr_positions')->find($user->person->position)->name : '';
-
         $modulesAccess = Module::whereHas('moduleRibbon', function ($query) {
-        $query->where('active', 1);
+            $query->where('active', 1);
         })->where('active', 1)
-        ->whereIn('id', Module_access::select('module_id')->where(function ($query) use ($user) {
-        $query->where('user_id', $user->id);
-        $query->whereNotNull('access_level');
-        $query->where('access_level', '>', 0);
-        })->get())
-        ->with(['moduleRibbon' => function ($query) use ($user) {
-        $query->whereIn('id', ModuleRibbon::select('module_ribbons.id')->join('module_accesses', function ($join) use ($user) {
-        $join->on('module_ribbons.module_id', '=', 'module_accesses.module_id');
-        $join->on('module_accesses.user_id', '=', DB::raw($user->id));
-        $join->on('module_ribbons.access_level', '<=', 'module_accesses.access_level');
-        })->get());
-        $query->orderBy('sort_order', 'Asc');
-        }])
-        ->orderBy('name', 'DESC')->get();
+            ->whereIn('id', Module_access::where('user_id', $user->id)->select('module_id')->where(function ($query) use ($user) {
+                $query->whereNotNull('access_level');
+                $query->where('access_level', '>', 0);
+                $query->orderBy('sort_order', 'Asc');
+            })->get())
+            ->with(['moduleRibbon' => function ($query) use ($user) {
+                $query->whereIn('id', ModuleRibbon::select('module_ribbons.id')->join('module_accesses', function ($join) use ($user) {
+                    $join->on('module_ribbons.module_id', '=', 'module_accesses.module_id');
+                   // $join->on('module_ribbons.access_level', '=', 'module_accesses.access_level');
+                })->get());
+                $query->orderBy('sort_order', 'Asc');
+            }])
+            ->orderBy('name', 'desc')
+            ->get();
 
-        $headerNameBold = $companyDetails['header_name_bold'];
-        $headerNameRegular = $companyDetails['header_name_regular'];
-        $headerAcronymBold = $companyDetails['header_acronym_bold'];
-        $headerAcronymRegular = $companyDetails['header_acronym_regular'];
 
-        $data['headerNameBold'] = $headerNameBold;
-        $data['headerNameRegular'] = $headerNameRegular;
-        $data['headerAcronymBold'] = $headerAcronymBold;
-        $data['headerAcronymRegular'] = $headerAcronymRegular;
-        $data['user'] = $user;
-        $data['full_name'] = $user->person->first_name . " " . $user->person->surname;
-        $data['avatar'] = (!empty($avatar)) ? Storage::disk('local')->url("avatars/$avatar") : Storage::disk('local')->url($defaultAvatar);
-        $data['position'] = $position;
 
-        $data['company_logo'] = $companyDetails['company_logo_url'];
+
+
+
+       // return $modulesAccess;
+
         $data['modulesAccess'] = $modulesAccess;
-        $view->with($data);
-        });
-         */
 
-        return view('Security/modules');
+        return view('Security/modules')->with($data);
     }
 
     /**
@@ -95,7 +103,7 @@ class ModuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -121,7 +129,7 @@ class ModuleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Module  $module
+     * @param \App\Module $module
      * @return \Illuminate\Http\Response
      */
     public function show(Module $module)
@@ -132,7 +140,7 @@ class ModuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Module  $module
+     * @param \App\Module $module
      * @return \Illuminate\Http\Response
      */
     public function edit(Module $module)
@@ -143,8 +151,8 @@ class ModuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Module  $module
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Module $module
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Module $module)
@@ -155,7 +163,7 @@ class ModuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Module  $module
+     * @param \App\Module $module
      * @return \Illuminate\Http\Response
      */
     public function destroy(Module $module)

@@ -31,7 +31,7 @@ trait AuthenticatesUsers
         $login_background_image = $loginImage->login_background_image;
         $default_login_image = 'loginImage/login-bg-16.jpg';
 
-       
+
         $data['companyDetailLogo'] = (!empty($loginImage->company_logo)) ? Storage::disk('local')->url("logo/$loginImage->company_logo") : '';
 
         $data['login_background_image'] = (!empty($login_background_image)) ? Storage::disk('local')->url("logos/$login_background_image") : Storage::disk('local')->url($default_login_image);
@@ -40,14 +40,13 @@ trait AuthenticatesUsers
         $data['headerNameRegular'] = $headerNameRegular;
         $data['headerAcronymBold'] = $headerAcronymBold;
         $data['headerAcronymRegular'] = $headerAcronymRegular;
-
         return view('auth.login')->with($data);
     }
 
     /**
      * Handle a login request to the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -59,7 +58,8 @@ trait AuthenticatesUsers
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -80,7 +80,7 @@ trait AuthenticatesUsers
     /**
      * Validate the user login request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return void
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -96,7 +96,7 @@ trait AuthenticatesUsers
     /**
      * Attempt to log the user into the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
     protected function attemptLogin(Request $request)
@@ -109,7 +109,7 @@ trait AuthenticatesUsers
     /**
      * Get the needed authorization credentials from the request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     protected function credentials(Request $request)
@@ -120,7 +120,7 @@ trait AuthenticatesUsers
     /**
      * Send the response after the user was authenticated.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     protected function sendLoginResponse(Request $request)
@@ -130,14 +130,14 @@ trait AuthenticatesUsers
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+                ?: redirect()->intended($this->redirectPath());
     }
 
     /**
      * The user has been authenticated.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param mixed $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
      * @return mixed
      */
     protected function authenticated(Request $request, $user)
@@ -148,7 +148,7 @@ trait AuthenticatesUsers
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -173,7 +173,7 @@ trait AuthenticatesUsers
     /**
      * Log the user out of the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -182,13 +182,15 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
+        $request->session()->regenerateToken();
+
         return $this->loggedOut($request) ?: redirect('/');
     }
 
     /**
      * The user has logged out of the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
     protected function loggedOut(Request $request)

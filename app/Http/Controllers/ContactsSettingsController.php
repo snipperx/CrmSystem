@@ -22,7 +22,8 @@ class ContactsSettingsController extends Controller
         $modules = Module::get();
 
         $data['modules'] = $modules;
-        return view('Security.setup')->with($data);
+       // return view('Security.setup')->with($data);
+        return view('add_modules')->with($data);
     }
 
     public function settings()

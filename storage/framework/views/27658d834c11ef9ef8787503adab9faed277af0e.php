@@ -252,6 +252,7 @@
                         <a href="javascript:;"><img src="../assets/img/user/user-8.jpg" alt="" /></a>
                         <h4 class="username text-ellipsis">
                             Blank Bloke
+
                             <small>Japanese</small>
                         </h4>
                     </li>
@@ -273,7 +274,7 @@
                         <a href="javascript:;"><img src="../assets/img/user/user-4.jpg" alt="" /></a>
                         <h4 class="username text-ellipsis">
                             Packed Puffs
-                            <small>Malaysian></small>
+                            <small><?php echo e($user->person->first_name); ?></small>
                         </h4>
                     </li>
                     <li>
@@ -307,5 +308,20 @@
             DashboardV2.init();
         });
     </script>
+
+    <script>
+        var handleDashboardGritterNotification = function() {
+            setTimeout(function() {
+                $.gritter.add({
+                    title: 'Welcome back, <?php echo e($user->person->first_name); ?>!',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus lacus ut lectus rutrum placerat.',
+                    image: '<?php echo e($avatar); ?>',
+                    sticky: true,
+                    time: '',
+                    class_name: 'my-sticky-class'
+                });
+            }, 1000);
+        };
+    </script>
 <?php $__env->stopPush(); ?>
-<?php echo $__env->make('layouts.default', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/gift/GiftedSpace/crm/resources/views/Dashboard/index.blade.php ENDPATH**/ ?>

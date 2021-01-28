@@ -254,6 +254,7 @@
                         <a href="javascript:;"><img src="../assets/img/user/user-8.jpg" alt="" /></a>
                         <h4 class="username text-ellipsis">
                             Blank Bloke
+
                             <small>Japanese</small>
                         </h4>
                     </li>
@@ -275,7 +276,7 @@
                         <a href="javascript:;"><img src="../assets/img/user/user-4.jpg" alt="" /></a>
                         <h4 class="username text-ellipsis">
                             Packed Puffs
-                            <small>Malaysian></small>
+                            <small>{{$user->person->first_name}}</small>
                         </h4>
                     </li>
                     <li>
@@ -308,5 +309,20 @@
         $(document).ready(function() {
             DashboardV2.init();
         });
+    </script>
+
+    <script>
+        var handleDashboardGritterNotification = function() {
+            setTimeout(function() {
+                $.gritter.add({
+                    title: 'Welcome back, {{$user->person->first_name}}!',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus lacus ut lectus rutrum placerat.',
+                    image: '{{$avatar}}',
+                    sticky: true,
+                    time: '',
+                    class_name: 'my-sticky-class'
+                });
+            }, 1000);
+        };
     </script>
 @endpush

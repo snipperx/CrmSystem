@@ -12,24 +12,6 @@ class ModuleAccessTableSeeder extends Seeder
      */
     public function run()
     {
-        Module_access::create([
-            'module_id'=> 1,
-            'user_id' => 1,
-            'active' => 1,
-            'access_level' => 5
-        ]);
-        Module_access::create([
-            'module_id'=> 2,
-            'user_id' => 1,
-            'active' => 1,
-            'access_level' => 5
-        ]);
 
-        Module_access::create([
-            'module_id'=> 3,
-            'user_id' => 1,
-            'active' => 1,
-            'access_level' => 5
-        ]);
     }
 }

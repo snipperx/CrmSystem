@@ -2,12 +2,15 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyIdentity extends Model
 {
+
+
     public $table = 'company_identities';
 
     //Mass assignable fields
@@ -15,9 +18,8 @@ class CompanyIdentity extends Model
         'company_name', 'full_company_name', 'header_name_bold', 'header_name_regular'
         , 'header_acronym_bold', 'header_acronym_regular', 'company_logo'
         , 'sys_theme_color', 'mailing_name', 'mailing_address', 'support_email'
-        , 'company_website', 'password_expiring_month', 'system_background_image', 'login_background_image'
+        , 'company_website', 'password_expiring_month', 'system_background_image', 'login_background_image',
     ];
-
 
     /**
      * Getter: get the location of the logo on the server.
@@ -26,20 +28,32 @@ class CompanyIdentity extends Model
      */
     public function getCompanyLogoUrlAttribute()
     {
-        if (!empty($this->company_logo)) return Storage::disk('local')->url("logo/$this->company_logo");
-        else return '';
+        if (!empty($this->company_logo)) {
+            return Storage::disk('local')->url("logo/$this->company_logo");
+        } else {
+            return '';
+        }
+
     }
 
     public function getSystemBackgroundImageUrlAttribute()
     {
-        if (!empty($this->system_background_image)) return Storage::disk('local')->url("logos/$this->system_background_image");
-        else return '';
+        if (!empty($this->system_background_image)) {
+            return Storage::disk('local')->url("logos/$this->system_background_image");
+        } else {
+            return '';
+        }
+
     }
 
     public function getLoginbackgroundImageUrlAttribute()
     {
-        if (!empty($this->login_background_image)) return Storage::disk('local')->url("logos/$this->login_background_image");
-        else return '';
+        if (!empty($this->login_background_image)) {
+            return Storage::disk('local')->url("logos/$this->login_background_image");
+        } else {
+            return '';
+        }
+
     }
 
     /**
@@ -68,8 +82,15 @@ class CompanyIdentity extends Model
         $settings['system_background_image_url'] = ($companyDetails && $companyDetails->system_background_image_url) ? $companyDetails->system_background_image_url : '';
         $settings['login_background_image_url'] = ($companyDetails && $companyDetails->login_background_image_url) ? $companyDetails->login_background_image_url : '';
         if ($settingName != null) {
-            if (array_key_exists($settingName, $settings)) return $settings[$settingName];
-            else return null;
-        } else return $settings;
+            if (array_key_exists($settingName, $settings)) {
+                return $settings[$settingName];
+            } else {
+                return null;
+            }
+
+        } else {
+            return $settings;
+        }
+
     }
 }

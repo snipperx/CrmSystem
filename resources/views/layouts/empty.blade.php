@@ -8,11 +8,12 @@
 	$bodyClass .= (!empty($paceTop)) ? 'pace-top ' : '';
 	$bodyClass .= (!empty($bodyExtraClass)) ? $bodyExtraClass . ' ' : '';
 @endphp
-<body class="{{ $bodyClass }}">
+{{--<body class="{{ $bodyClass }}">--}}
+<body >
 	@include('includes.component.page-loader')
-	
+
 	@yield('content')
-			
+
 	@include('includes.page-js')
 </body>
 </html>

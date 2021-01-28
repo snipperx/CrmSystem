@@ -63,7 +63,10 @@
                                             <button type="button" id="edit_ribbon" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#edit-ribbon-modal" data-id="{{ $ribbon->id }}" data-name="{{ $ribbon->ribbon_name }}" data-path="{{ $ribbon->ribbon_path }}" data-description="{{ $ribbon->description }}" data-sort_order="{{ $ribbon->sort_order }}" data-access_level="{{ $ribbon->access_level }}"><i class="fa fa-pencil-square-o"></i> Edit</button>
                                         </td>
                                         <td nowrap>
-                                            @if((!empty($ribbon->active) && $ribbon->active == 1))<p><input type="checkbox" id="{{$ribbon->id}}" checked></p>@else((!empty($ribbon->active) && $ribbon->active == 0))<input type="checkbox" id="{{$ribbon->id}}" unchecked>@endif
+                                            @if((!empty($ribbon->active) && $ribbon->active == 1))
+                                                <p><input type="checkbox" id="{{$ribbon->id}}" checked></p>
+                                            @else((!empty($ribbon->active) && $ribbon->active == 0))
+                                                <input type="checkbox" id="{{$ribbon->id}}" unchecked>@endif
                                     </tr>
                                 @endforeach
                             @else
@@ -82,7 +85,6 @@
                     </div>
                     <!-- end table-responsive -->
                     <div class="box-footer">
-
                         <button type="button" id="add-new-ribbon" class="btn btn-success pull-right" data-toggle="modal" data-target="#add-new-ribbon-modal">Add New ribbon</button>
                     </div>
 
@@ -99,7 +101,7 @@
             <!-- animated switcher -->
                 <script>
                     $('input[type="checkbox"]').on('click', function () {
-
+                        console.log('kill');
                         let token = $('meta[name="csrf-token"]').attr('content');
                         let data = {};
                         data.id = $(this).attr('id');
@@ -141,6 +143,7 @@
 
                     //Post module form to server using ajax (ADD)
                     $('#add-ribbon').on('click', function() {
+                        console.log({{$mod}});
                         var strUrl = '/add_ribbon';
                         var formName = 'add-ribbon-form';
                         var modalID = 'add-new-ribbon-modal';

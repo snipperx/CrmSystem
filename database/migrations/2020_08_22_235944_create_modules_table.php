@@ -14,10 +14,10 @@ class CreateModulesTable extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name')->nullable();
             $table->string('path')->nullable();
-            $table->integer('active')->nullable();
+            $table->integer('active')->default(1);
             $table->string('font_awesome')->nullable();
             $table->string('glyph_icon')->nullable();
             $table->timestamps();

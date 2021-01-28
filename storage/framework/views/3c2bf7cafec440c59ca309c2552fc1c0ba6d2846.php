@@ -50,14 +50,15 @@
                         </div>
                     </div>
                 </div>
+                <div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" id="add-module" class="btn btn-success">Add Module</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" id="add-module" class="btn btn-success">Add Module</button>
+                    </div>
             </form>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-</div>
+</div><?php /**PATH /home/gift/GiftedSpace/crm/resources/views/Security/partials/add_module.blade.php ENDPATH**/ ?>

@@ -8,8 +8,15 @@
         "php": "^7.1.3",
         "ext-json": "*",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.7.*",
-        "laravel/tinker": "~1.0"
+        "google/apiclient": "^2.7",
+        "guzzlehttp/guzzle": "^7.1",
+        "hashids/hashids": "^4.0",
+        "laravel/framework": "v6.15.0",
+        "laravel/tinker": "~1.0",
+        "spatie/laravel-permission": "^3.13",
+        "tymon/jwt-auth": "^1.0.0",
+        "webpatser/laravel-uuid": "3.0",
+        "yajra/laravel-datatables-oracle": "^9.11"
     },
     "require-dev": {
           "filp/whoops": "^2.0",

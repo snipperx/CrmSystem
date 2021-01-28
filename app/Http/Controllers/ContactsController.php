@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CompanyIdentity;
 use App\Http\Requests;
-
+use App\Traits\StoreImageTrait;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class ContactsController extends Controller
 {
+
+    use StoreImageTrait;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -45,8 +48,6 @@ class ContactsController extends Controller
         ]);
 
         $compDetails = CompanyIdentity::first();
-
-        //$compDetails = (Schema::hasTable('company_identities')) ? CompanyIdentity::first() : null;
         if ($compDetails) { //update
             $compDetails->update($request->all());
 
@@ -93,43 +94,22 @@ class ContactsController extends Controller
     }
 
     /**
-     * Helper function to upload logo files.
+     * call the uploadimage Trait function to upload logo files.
      *
      * @param \App\Http\Requests
      * @param \App\CompanyIdentity
      */
     private function uploadLogo(Request $request, CompanyIdentity $compDetails)
     {
-        if ($request->hasFile('company_logo')) {
-            $image_name = $request->file('company_logo');
-            $image_ext = $image_name->extension();
-            if (in_array($image_ext, ['jpg', 'png', 'jpeg']) &&
-                $image_name->isValid()) {
-                $filename = pathinfo($image_name->getClientOriginalName(), PATHINFO_FILENAME);
-                $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
-                $path = $image_name->storeAs('public/logo', $fileNameToStore);
-                $compDetails->company_logo = $fileNameToStore;
-                $compDetails->update();
-            }
-        }
-
+        $formInput = $request->all();
+        $formInput['company_logo'] = $this->verifyAndStoreImage($request, 'company_logo', 'logo', $compDetails);
     }
 
 
     private function uploadLoginImage(Request $request, CompanyIdentity $compDetails)
     {
-        if ($request->hasFile('login_background_image')) {
-            $image_name = $request->file('login_background_image');
-            $image_ext = $image_name->extension();
-            if (in_array($image_ext, ['jpg', 'png', 'jpeg']) &&
-                $image_name->isValid()) {
-                $filename = pathinfo($image_name->getClientOriginalName(), PATHINFO_FILENAME);
-                $fileNameToStore = $filename . '-' . time() . '.' . $image_ext;
-                $path = $image_name->storeAs('public/logos', $fileNameToStore);
-                $compDetails->login_background_image = $fileNameToStore;
-                $compDetails->update();
-            }
-        }
+        $formInput = $request->all();
+        $formInput['login_background_image'] = $this->verifyAndStoreImage($request, 'login_background_image', 'logos', $compDetails);
     }
 
 

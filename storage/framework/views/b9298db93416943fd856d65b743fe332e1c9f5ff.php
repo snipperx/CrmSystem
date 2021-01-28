@@ -9,7 +9,8 @@
 	<!-- begin navbar-header -->
 	<div class="navbar-header">
 		<a href="<?php echo e(url('/')); ?>" class="navbar-brand"><span class="navbar-logo"></span> <img src="<?php echo e($companyDetailLogo); ?>"
-															class="img-responsive " width="36" height="36"> <b><?php echo e($headerNameBold); ?></b> </a>
+															class="img-responsive " width="36" height="36">
+			<b><?php echo e($headerNameBold); ?></b> </a>
 
 
 		<?php if(!$sidebarHide): ?>
@@ -30,7 +31,7 @@
 	</div>
 	<!-- end navbar-header -->
 	
-	<?php echo $__env->renderWhen($headerMegaMenu, 'includes.header-mega-menu', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path'))); ?>
+	<?php echo $__env->renderWhen($headerMegaMenu, 'includes.header-mega-menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?>
 	
 	<!-- begin header-nav -->
 	<ul class="navbar-nav navbar-right">
@@ -159,3 +160,4 @@
 	<!-- end header navigation right -->
 </div>
 <!-- end #header -->
+<?php /**PATH /home/gift/GiftedSpace/crm/resources/views/includes/header.blade.php ENDPATH**/ ?>

@@ -9,7 +9,8 @@
 	<!-- begin navbar-header -->
 	<div class="navbar-header">
 		<a href="{{ url('/') }}" class="navbar-brand"><span class="navbar-logo"></span> <img src="{{ $companyDetailLogo }}"
-															class="img-responsive " width="36" height="36"> <b>{{$headerNameBold}}</b> </a>
+															class="img-responsive " width="36" height="36">
+			<b>{{$headerNameBold}}</b> </a>
 {{--		<span class="logo-lg"><img src="{{ $companyDetailLogo }}"--}}
 {{--								   class="img-responsive img-thumbnail" width="36" height="23"><b>{$headerNameBold}}</span>--}}
 		@if (!$sidebarHide)

@@ -3,7 +3,7 @@
 @section('title', 'Managed Tables - Fixed Header')
 
 @push('css')
-    <link href="/assets/css/tree.css" rel="stylesheet" />
+    <link href="/assets/css/bootstrap_tree.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -40,166 +40,29 @@
                 <!-- end alert -->
                 <!-- begin panel-body -->
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="menu">
+                    <div class="row" class="col-lg-12">
 
-                                <div class="accordion">
-                                    <!-- Áreas -->
-                                    <div class="accordion-group">
-                                        <!-- Área -->
-                                        <div class="accordion-heading area">
-                                            <a class="accordion-toggle" data-toggle="collapse" href="#area1">Área #1</a>
-                                        </div><!-- /Área -->
-
-                                        <div class="accordion-body collapse" id="area1">
-                                            <div class="accordion-inner">
-                                                <div class="accordion" id="equipamento1">
-                                                    <!-- Equipamentos -->
-
-                                                    <div class="accordion-group">
-                                                        <div class="accordion-heading equipamento">
-                                                            <a class="accordion-toggle" data-parent="#equipamento1-1" data-toggle="collapse" href="#ponto1-1">Equipamento #1-1</a>
-                                                        </div><!-- Pontos -->
-
-                                                        <div class="accordion-body collapse" id="ponto1-1">
-                                                            <div class="accordion-inner">
-                                                                <div class="accordion" id="servico1">
-                                                                    <div class="accordion-group">
-                                                                        <div class="accordion-heading ponto">
-                                                                            <a class="accordion-toggle" data-parent="#servico1-1-1" data-toggle="collapse" href="#servico1-1-1">Ponto #1-1-1</a>
-                                                                        </div><!-- Serviços -->
-
-                                                                        <div class="accordion-body collapse" id="servico1-1-1">
-                                                                            <div class="accordion-inner">
-                                                                                <ul class="nav nav-list">
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-1</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-2</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-3</a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div><!-- /Serviços -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- /Pontos -->
-                                                    </div><!-- /Equipamentos -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- /accordion -->
-
-                                <div class="accordion">
-                                    <!-- Áreas -->
-                                    <div class="accordion-group">
-                                        <!-- Área -->
-                                        <div class="accordion-heading area">
-                                            <a class="accordion-toggle" data-toggle="collapse" href="#area2">Área #1</a>
-                                        </div><!-- /Área -->
-
-                                        <div class="accordion-body collapse" id="area2">
-                                            <div class="accordion-inner">
-                                                <div class="accordion" id="equipamento1">
-                                                    <!-- Equipamentos -->
-
-                                                    <div class="accordion-group">
-                                                        <div class="accordion-heading equipamento">
-                                                            <a class="accordion-toggle" data-toggle="collapse" href="#ponto2-1">Equipamento #1-1</a>
-                                                        </div><!-- Pontos -->
-
-                                                        <div class="accordion-body collapse" id="ponto2-1">
-                                                            <div class="accordion-inner">
-                                                                <div class="accordion" id="servico1">
-                                                                    <div class="accordion-group">
-                                                                        <div class="accordion-heading ponto">
-                                                                            <a class="accordion-toggle" data-toggle="collapse" href="#servico1-2-1">Ponto #1-1-1</a>
-                                                                        </div><!-- Serviços -->
-
-                                                                        <div class="accordion-body collapse" id="servico1-2-1">
-                                                                            <div class="accordion-inner">
-                                                                                <ul class="nav nav-list">
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-1</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-2</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-3</a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div><!-- /Serviços -->
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="accordion" id="servico2">
-                                                                    <div class="accordion-group">
-                                                                        <div class="accordion-heading ponto">
-                                                                            <a class="accordion-toggle" data-toggle="collapse" href="#servico2-2-2">Ponto #1-1-1</a>
-                                                                        </div><!-- Serviços -->
-
-                                                                        <div class="accordion-body collapse" id="servico2-2-2">
-                                                                            <div class="accordion-inner">
-                                                                                <ul class="nav nav-list">
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-1</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-2</a></li>
-
-                                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-3</a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div><!-- /Serviços -->
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div><!-- /Pontos -->
-                                                    </div><!-- /Equipamentos -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- /accordion -->
-
-                                <div class="accordion">
-                                    <!-- Áreas -->
-                                    <div class="accordion-group">
-                                        <!-- Área -->
-                                        <div class="accordion-heading area">
-                                            <a class="accordion-toggle" data-toggle="collapse" href="#area3">Área #1</a>
-                                        </div><!-- /Área -->
-
-                                        <div class="accordion-body collapse" id="area3">
-                                            <div class="accordion-inner">
-                                                <div class="accordion" id="equipamento1">
-                                                    <!-- Equipamentos -->
-
-
-                                                    <div class="accordion-group">
-                                                        <div class="accordion-heading equipamento">
-                                                            <a class="accordion-toggle" data-toggle="collapse" href="#servico3-1-1">Ponto #1-1-1</a>
-                                                        </div><!-- Serviços -->
-
-                                                        <div class="accordion-body collapse" id="servico3-1-1">
-                                                            <div class="accordion-inner">
-                                                                <ul class="nav nav-list">
-                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-1</a></li>
-
-                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-2</a></li>
-
-                                                                    <li><a href="#"><i class="icon-chevron-right"></i> Serviço #1-1-1-3</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div><!-- /Serviços -->
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- /accordion -->
-                            </div>
+                        <div class="tree well" >
+                            @foreach($modulesAccess as $module)
+                                @if(count($module->moduleRibbon) > 0)
+                            <ul>
+                                <li>
+                                    <i class="fa {{ !empty($module->font_awesome) ? $module->font_awesome : '' }}"></i>
+                                    <span><i class="icon-folder-open"></i>{{$module->name}}</span> <a href="">Goes somewhere</a>
+                                    <ul>
+                                        @foreach($module->moduleRibbon as $ribbon)
+                                        <li>
+                                            <span><i class="icon-minus-sign"></i>{{ $ribbon->ribbon_name }} </span> <a href="{{ $ribbon->ribbon_path }}"><span class="badge badge-secondary">badge</span></a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            </ul>
+                            @endif
+                            @endforeach
                         </div>
+
+                    <!-- beg
                     </div>
                 </div>
                 <!-- end panel-body -->
@@ -212,15 +75,21 @@
 @endsection
 
 @push('scripts')
-    <script src="/assets/plugins/datatables/js/jquery.dataTables.js"></script>
-    <script src="/assets/plugins/datatables/js/dataTables.bootstrap4.js"></script>
-    <script src="/assets/plugins/datatables/js/fixedHeader/dataTables.fixedHeader.js"></script>
-    <script src="/assets/plugins/datatables/js/responsive/dataTables.responsive.js"></script>
-    <script src="/assets/plugins/datatables/js/responsive/responsive.bootstrap4.js"></script>
-    <script src="/assets/js/demo/table-manage-fixed-header.demo.js"></script>
+
     <script>
-        $(document).ready(function() {
-            TableManageFixedHeader.init();
+        $(function () {
+            $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+            $('.tree li.parent_li > span').on('click', function (e) {
+                var children = $(this).parent('li.parent_li').find(' > ul > li');
+                if (children.is(":visible")) {
+                    children.hide('fast');
+                    $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+                } else {
+                    children.show('fast');
+                    $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+                }
+                e.stopPropagation();
+            });
         });
     </script>
 @endpush

@@ -14,8 +14,9 @@ class CreateHRPeopleTable extends Migration
     public function up()
     {
         Schema::create('hr_people', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index()->nullable();
+            $table->increments('id');
+            $table->integer('user_id')->nullable();
+           // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
@@ -41,12 +42,17 @@ class CreateHRPeopleTable extends Migration
             $table->string('proof_drive_permit', 100)->nullable();
             $table->bigInteger('proof_drive_permit_exp_date')->nullable();
             $table->bigInteger('drivers_licence_exp_date')->nullable();
-            $table->smallInteger('gender')->nullable();
+            $table->smallInteger('gender')->default(0);
             $table->smallInteger('own_transport')->nullable();
             $table->integer('marital_status')->nullable();
             $table->integer('ethnicity')->nullable();
             $table->string('profile_pic')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->integer('manager_id')->nullable();
+            $table->bigInteger('date_joined')->nullable();
+            $table->bigInteger('date_left')->nullable();
+            $table->smallInteger('role_id')->nullable();
+            $table->string('about_me', 500)->nullable();
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }

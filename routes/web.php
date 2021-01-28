@@ -22,24 +22,61 @@ Auth::routes(['register' => false]);
 Auth::routes();
 
 
-Route::get('/profile' , 'ContactsSettingsController@index')->name('profile');;
-Route::get('/settings' , 'ContactsSettingsController@settings')->name('settings');;
-Route::get('/contacts', 'ContactsController@index')->name('Contacts');
-Route::get('/setup', 'ContactsSettingsController@index')->name('Contacts');
+    //Roles
+    Route::resource('roles', 'RoleController');
+    Route::get('/profile', 'ContactsSettingsController@index')->name('profile');;
+    Route::get('/settings', 'ContactsSettingsController@settings')->name('settings');;
+    Route::get('/company_settings', 'ContactsController@index')->name('Contacts');
+    Route::get('/setup', 'ContactsSettingsController@index')->name('Contacts');
 
-Route::get('add_ribbons/{mod}', 'ModuleRibbonController@index');
+    Route::get('add_ribbons/{mod}', 'ModuleRibbonController@index')->name('add_ribbons');
 
-Route::post('module_active/{mod}', 'ContactsSettingsController@moduleAct');
+    Route::post('module_active/{mod}', 'ContactsSettingsController@moduleAct');
 
-Route::post('/add_contacts', 'ContactsController@create')->name('add_contacts');;
-Route::post('add_logo', 'ContactsController@addlogo');;
-Route::post('add_module', 'ModuleController@store');;
-Route::post('add_ribbon', 'ModuleRibbonController@store');;
-Route::post('ribbon_active/{mod}', 'ModuleRibbonController@ribbonAct');
+    Route::post('/add_contacts', 'ContactsController@create')->name('add_contacts');;
+    Route::post('add_logo', 'ContactsController@addlogo');;
+    Route::post('add_module', 'ModuleController@store');;
+    Route::post('add_ribbon', 'ModuleRibbonController@store');;
+    Route::post('ribbon_active/{mod}', 'ModuleRibbonController@ribbonAct');
+
+    Route::get('/modules', 'ModuleController@index');
+
+//Hr
+    Route::get('customer', 'customerController@index')->name('customer');
+
+    Route::get('users', 'UserController@index')->name('users');
+
+    Route::get('users/{id}', 'UserController@show')->name('view_users');
+//    Route::get('/users', 'UsersController@index')->name('users');
+//    Route::post('/searchUsers', 'UsersController@search')->name('searchUsers');
+
+    Route::get('/viewUser/{id}', 'UsersController@show')->name('viewUser');
+
+    Route::get('/getUsers', 'UsersController@getUsers')->name('getUsers');
 
 
-Route::get('/modules' ,'ModuleController@index');
+    Route::get('/module__access', 'ModuleController@access')->name('access');
 
+    Route::post('/access_save/{user}', 'ModuleController@UserAccess')->name('access');
+
+
+    //calender
+
+    Route::get('/calender', 'CalenderController@index')->name('calender');
+
+    Route::get('/tasks', 'TasksController@index')->name('task');
+
+
+  //  Route::resource('gcalendar', 'gCalendarController');
+    Route::resource('cal', 'gCalenderController');
+    Route::get('oauth','gCalenderController@oauth');
+  //  Route::get('oauth', ['as' => 'oauthCallback', 'uses' => 'gCalendarController@oauth']);
+
+
+
+
+
+//Route::post('/edit/{id}', 'ArticleController@updateArticle')->name('updateArticle');
 
 
 // Route::get('/email/inbox', function () {
@@ -63,9 +100,7 @@ Route::get('/modules' ,'ModuleController@index');
 // Route::get('/ui/unlimited-nav-tabs', function () {
 //     return view('pages/ui-unlimited-nav-tabs');
 // });
-// Route::get('/ui/modal-notification', function () {
-//     return view('pages/ui-modal-notification');
-// });
+
 // Route::get('/ui/widget-boxes', function () {
 //     return view('pages/ui-widget-boxes');
 // });
@@ -111,9 +146,9 @@ Route::get('/modules' ,'ModuleController@index');
 // Route::get('/form/validation', function () {
 //     return view('pages/form-validation');
 // });
-// Route::get('/form/wizards', function () {
-//     return view('pages/form-wizards');
-// });
+//  Route::get('/form/wizards', function () {
+//      return view('pages/form-wizards');
+//  });
 // Route::get('/form/wizards-validation', function () {
 //     return view('pages/form-wizards-validation');
 // });

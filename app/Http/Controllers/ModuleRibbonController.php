@@ -6,8 +6,7 @@ use App\Module;
 use App\ModuleRibbon;
 use App\Module_access;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
+use Hashids\Hashids;
 use Illuminate\Http\Request;
 
 class ModuleRibbonController extends Controller
@@ -20,19 +19,29 @@ class ModuleRibbonController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Module $rib
+     * @param Module $mod
      * @return Module
      */
     public function index($mod)
     {
-        $ribbons = Module::where('id', $mod)->first();
+        $hashids = new Hashids();
+        $modID = $hashids->decode($mod);
+
+        $id = implode($modID);
+
+        if (empty($id)) {
+            $id = $mod;
+            $ribbons = Module::where('id', $id)->first();
+           // return $mod;
+        } else
+            $ribbons = Module::where('id', $id)->first();
 
         $aRarrayRights = array(0 => 'None', 1 => 'Read', 2 => 'Write', 3 => 'Modify', 4 => 'Admin', 5 => 'SuperUser');
 
-        if ($ribbons->active == 1) {
+        if (($ribbons->active == 1)) {
             $ribbons->load('moduleRibbon');
             $data['ribbons'] = $ribbons;
-            $data['mod'] = $mod;
+            $data['mod'] = 1;
             $data['arrayRights'] = $aRarrayRights;
 
             return view('Security.ribbon')->with($data);
@@ -77,15 +86,14 @@ class ModuleRibbonController extends Controller
             'sort_order' => $moduleData['sort_order'],
         ]);
 
-        if($moduleData['access_level'] >= 3){
-            $module = Module_access::create([
-                'active' => 1,
-                'module_id' => $moduleData['module_id'],
-                'user_id' => $user = Auth::id(),
-                'access_level' => $moduleData['access_level'],
-            ]);
 
-        }
+        $module = Module_access::create([
+            'active' => 1,
+            'module_id' => $moduleData['module_id'],
+            'user_id' => $user = Auth::id(),
+            'access_level' => $moduleData['access_level'],
+        ]);
+
 
         return response()->json(['new_name' => $moduleData['ribbon_name'], 'new_path' => $moduleData['ribbon_path']], 200);
     }
@@ -96,13 +104,17 @@ class ModuleRibbonController extends Controller
      * @param \App\ModuleRibbon $moduleRibbon
      * @return \Illuminate\Http\Response
      */
-    public function ribbonAct(ModuleRibbon  $mod){
-        if ($mod->active == 1) $status = 0;
+    public function ribbonAct($mod)
+    {
+
+        $module = ModuleRibbon::where('id', $mod)->first();
+
+        if ($module->active == 1) $status = 0;
         else $status = 1;
 
-        $mod->active = $status;
-        $mod->update();
-        return response()->json(['success'=>'Status  successfully Changed'], 200);
+        $module->active = $status;
+        $module->update();
+        return response()->json(['success' => 'Status  successfully Changed'], 200);
     }
 
     /**

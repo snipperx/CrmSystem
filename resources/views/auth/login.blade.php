@@ -35,22 +35,23 @@
                     <input id="email" type="email" class="form-control input-lg @error('email') is-invalid @enderror"
                            name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email"
                            autofocus>
-                    @if ($errors->has('name'))
+                    @error('email')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                    @endif
+                    @enderror
                 </div>
+
 
                 <div class="form-group m-b-20">
                     <input id="password" class="form-control input-lg" type="password"
                            class="form-control @error('password') is-invalid @enderror" name="password" required
                            autocomplete="current-password" placeholder="Password">
-                    @if ($errors->has('password'))
+                    @error('password')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                    @endif
+                    @enderror
                 </div>
 
                 <div class="checkbox m-b-20">

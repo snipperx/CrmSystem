@@ -2,11 +2,15 @@
 
 namespace App;
 
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class HRPerson extends Model
 {
+
     public $table = 'hr_people';
+
+    protected $appends = ['hashid'];
 
     // Mass assignable fields
     protected $fillable = [
@@ -15,6 +19,7 @@ class HRPerson extends Model
         'proof_drive_permit', 'proof_drive_permit_exp_date', 'drivers_licence_exp_date', 'gender', 'own_transport', 'marital_status',
         'ethnicity', 'profile_pic', 'status','division_level_1', 'division_level_2', 'division_level_3',
         'division_level_4', 'division_level_5', 'leave_profile', 'manager_id','date_joined','date_left','role_id','position',
+        'about_me'
 
     ];
 
@@ -24,12 +29,20 @@ class HRPerson extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // Relationship hr_person and hr position
+    public function position(){
+        return $this->hasMany(HRPositions::class, 'position');
+    }
 
     //Full Name accessor
     public function getFullNameAttribute() {
         return $this->first_name . ' ' . $this->surname;
     }
 
+    public function getHashidAttribute()
+    {
+        return  Module::hashids()->encode($this->attributes['id']);
+    }
 
     //Full Profile picture url accessor
     public function getProfilePicUrlAttribute() {

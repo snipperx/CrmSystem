@@ -1,8 +1,10 @@
 <?php
 
+use App\Traits\Uuids;
 use App\HRPerson;
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Module_access;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,19 +15,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-       $user =  User::create([
-            'name' => 'Nkosana',
-            'email' => 'nkosana@test.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        HRPerson::create([
-            'user_id' => $user['id'],
-            'first_name' =>  'nkosana',
-            'surname' =>  'Ncube',
-            'status' =>  1,
-            'email' => $user['email'],
-        ]);
+       
 
     }
 }

@@ -63,7 +63,10 @@
                                             <button type="button" id="edit_ribbon" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#edit-ribbon-modal" data-id="<?php echo e($ribbon->id); ?>" data-name="<?php echo e($ribbon->ribbon_name); ?>" data-path="<?php echo e($ribbon->ribbon_path); ?>" data-description="<?php echo e($ribbon->description); ?>" data-sort_order="<?php echo e($ribbon->sort_order); ?>" data-access_level="<?php echo e($ribbon->access_level); ?>"><i class="fa fa-pencil-square-o"></i> Edit</button>
                                         </td>
                                         <td nowrap>
-                                            <?php if((!empty($ribbon->active) && $ribbon->active == 1)): ?><p><input type="checkbox" id="<?php echo e($ribbon->id); ?>" checked></p><?php else: ?><input type="checkbox" id="<?php echo e($ribbon->id); ?>" unchecked><?php endif; ?>
+                                            <?php if((!empty($ribbon->active) && $ribbon->active == 1)): ?>
+                                                <p><input type="checkbox" id="<?php echo e($ribbon->id); ?>" checked></p>
+                                            <?php else: ?>
+                                                <input type="checkbox" id="<?php echo e($ribbon->id); ?>" unchecked><?php endif; ?>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php else: ?>
@@ -82,7 +85,6 @@
                     </div>
                     <!-- end table-responsive -->
                     <div class="box-footer">
-
                         <button type="button" id="add-new-ribbon" class="btn btn-success pull-right" data-toggle="modal" data-target="#add-new-ribbon-modal">Add New ribbon</button>
                     </div>
 
@@ -91,7 +93,7 @@
                 <!-- end panel-body -->
             </div>
             <!-- include module modal -->
-        <?php echo $__env->make('Security.partials.add_ribbon', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('Security.partials.add_ribbon', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- end panel -->
         <?php $__env->stopSection(); ?>
 
@@ -99,7 +101,7 @@
             <!-- animated switcher -->
                 <script>
                     $('input[type="checkbox"]').on('click', function () {
-
+                        console.log('kill');
                         let token = $('meta[name="csrf-token"]').attr('content');
                         let data = {};
                         data.id = $(this).attr('id');
@@ -141,6 +143,7 @@
 
                     //Post module form to server using ajax (ADD)
                     $('#add-ribbon').on('click', function() {
+                        console.log(<?php echo e($mod); ?>);
                         var strUrl = '/add_ribbon';
                         var formName = 'add-ribbon-form';
                         var modalID = 'add-new-ribbon-modal';
@@ -154,4 +157,4 @@
                 </script>
 
     <?php $__env->stopPush(); ?>
-<?php echo $__env->make('layouts.default', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/gift/GiftedSpace/crm/resources/views/Security/ribbon.blade.php ENDPATH**/ ?>

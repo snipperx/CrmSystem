@@ -14,11 +14,11 @@ class CreateModuleRibbonsTable extends Migration
     public function up()
     {
         Schema::create('module_ribbons', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('module_id')->nullable();
             $table->integer('sort_order')->nullable();
             $table->integer('access_level')->nullable();
-            $table->integer('active')->nullable();
+            $table->integer('active')->default(1);
             $table->string('ribbon_name')->nullable();
             $table->string('ribbon_path')->nullable();
             $table->string('description')->nullable();

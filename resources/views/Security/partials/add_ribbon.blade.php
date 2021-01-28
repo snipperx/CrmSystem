@@ -51,7 +51,6 @@
                 </div>
 
 
-
                 <div class="form-group">
                     <label for="sort_order" class="col-sm-3 control-label">Sort Number</label>
                     <div class="col-sm-10">
@@ -72,28 +71,28 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-lock"></i>
                             </div>
-                        <select class="form-control" name="access_level" id="access_level" placeholder="" required>
-                            <option value="0">None</option>
-                            <option value="1">Read</option>
-                            <option value="2">Write</option>
-                            <option value="3">Modify</option>
-                            <option value="4">Admin</option>
-                            <option value="5">Super User</option>
-                        </select>
+                            <select class="form-control" name="access_level" id="access_level" placeholder="" required>
+                                <option value="0">None</option>
+                                <option value="1">Read</option>
+                                <option value="2">Write</option>
+                                <option value="3">Modify</option>
+                                <option value="4">Admin</option>
+                                <option value="5">Super User</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-        </div>
 
                 <input type="hidden" class="form-control" id="module_id" name="module_id" value="{{$mod}}"
                        placeholder="Enter Module Font Awesome Class">
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" id="add-ribbon" class="btn btn-success">Add ribbon</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" id="add-ribbon" class="btn btn-success">Add ribbon</button>
+                </div>
+            </form>
         </div>
-        </form>
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
